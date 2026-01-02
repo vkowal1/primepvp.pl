@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>EternalRP - Podanie do Administracji</title>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="logo.png" alt="Logo EternalRP">
+                    <h1>EternalRP</h1>
+                </div>
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <ul>
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="regulamin.html">Regulamin</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="podanie.html">Podania</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero">
+            <h2>Podanie do Administracji</h2>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <h3>Formularz podania</h3>
+                <form id="application-form" method="POST" action="">
+                    <div class="form-group">
+                        <label for="discordwth">Nick discord z #:</label>
+                        <input type="text" id="discordwth" name="discordwth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="age">Wiek</label>
+                        <input type="number" id="age" name="age" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mutacja">Mutacja Głosu</label>
+                        <input type="text" id="mutacja" name="mutacja" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="admdos">Twoje Doświadczenie jako administrator:</label>
+                        <textarea id="admdos" name="admdos" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="sbjzd">Opisz siebie w jednym zdaniu</label>
+                        <input type="text" id="sbjzd" name="sbjzd" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="wniesiesz">Co jesteś wstanie wnieść do administracji?</label>
+                        <textarea id="wniesiesz" name="wniesiesz" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="spladka">Czy jesteś wstanie płacić miesięczne składki ok. 10/15 zł? (nie wymagane)</label>
+                        <input type="text" id="spladka" name="spladka" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="motywacyjny">List motywacyjny min. 50 słów</label>
+                        <textarea id="motywacyjny" name="motywacyjny" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Wyślij podanie" class="btn">
+                    </div>
+                </form>
+                <script>
+                    const form = document.getElementById("application-form");
+                    form.addEventListener("submit", (event) => {
+                      event.preventDefault();
+                      const formData = new FormData(event.target);
+                      const webhookUrl = "https://discord.com/api/webhooks/1156960016146898944/Kk6akbconozOHRkn-GH8ifjz4fJfJ8hoI4WT4SLXA2iIWU4--cn3XhBk7QZP88GubJ97";
+                      const payload = {
+                        content: "Nowe podanie do Administracji!",
+                        embeds: [
+                          {
+                            title: "Nowe podanie do Administracji!",
+                            fields: [
+                              { name: "Nick discord z #:", value: formData.get("discordwth"), inline: true },
+                              { name: "Wiek:", value: formData.get("age"), inline: true },
+                              { name: "Mutacja:", value: formData.get("mutacja"), inline: true },
+                              { name: "Twoje Doświadczenie jako administrator:", value: formData.get("admdos"), inline: true },
+                              { name: "Opisz siebie w jednym zdaniu:", value: formData.get("sbjzd") },
+                              { name: "Co jesteś wstanie wnieść do administracji?:", value: formData.get("wniesiesz") },
+                              { name: "Czy jesteś wstanie płacić miesięczne składki ok. 10/15 zł? (nie wymagane):", value: formData.get("spladka"), inline: true },
+                              { name: "List motywacyjny min. 50 słów:", value: formData.get("motywacyjny") },
+                            ],
+                          },
+                        ],
+                      };
+                      fetch(webhookUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                      })
+                        .then(() => {
+                          alert("Podanie zostało wysłane!");
+                          form.reset();
+                        })
+                        .catch(() => {
+                          alert("Wystąpił błąd podczas wysyłania podania. Spróbuj ponownie później.");
+                        });
+                    });
+                  </script>                  
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 EternalRP. Wszelkie prawa zastrzeżone.</p>
+            <p>Created by SKYT#0001</p>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="regulamin.html">Regulamin</a></li>
+                <li><a href="discord.html">Discord</a></li>
+                <li><a href="podanie.html">Podania</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/8f4b4c2d36.js" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>   

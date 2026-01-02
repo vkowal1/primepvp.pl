@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Nightcity - Podanie do CarZone</title>
+    <link rel="shortcut icon" href="logo.png" type="image/png">
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="container">
+                <div class="logo">
+                    <img src="logo.png" alt="Logo Nightcity">
+                    <h1>Nightcity</h1>
+                </div>
+                <div class="menu-toggle"><i class="fas fa-bars"></i></div>
+                <ul>
+                    <li><a href="index.html">Strona główna</a></li>
+                    <li><a href="regulamin.html">Regulamin</a></li>
+                    <li><a href="discord.html">Discord</a></li>
+                    <li><a href="podanie.html">Podania</a></li>
+                </ul>
+            </div>
+        </nav>
+        <div class="hero">
+            <h2>Podanie do CarZone</h2>
+        </div>
+    </header>
+    <main>
+        <section>
+            <div class="container">
+                <h3>Formularz podania</h3>
+                <form id="application-form" method="POST" action="">
+                    <div class="form-group">
+                        <label for="discordwth">Nick discord z #:</label>
+                        <input type="text" id="discordwth" name="discordwth" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="nameic">Imię i nazwisko IC:</label>
+                        <input type="text" id="nameic" name="nameic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageooc">Wiek OOC:</label>
+                        <input type="number" id="ageooc" name="ageooc" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whyt">Dlaczego chcesz wstąpić do CarZone (Min 30 słów):</label>
+                        <textarea id="whyt" name="whyt" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="ageic">Wiek IC:</label>
+                        <input type="number" id="ageic" name="ageic" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="mutacja">Mutacja Głosu</label>
+                        <input type="text" id="mutacja" name="mutacja" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="prawojazdy">Czy posiadasz prawo jazdy (IC)</label>
+                        <input type="text" id="prawojazdy" name="prawojazdy" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="karany">Czy byłeś/aś kiedyś karany/a ? (IC)</label>
+                        <input type="text" id="karany" name="karany" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="whyyou">Dlaczego mamy wybrać akurat ciebie?</label>
+                        <textarea id="whyyou" name="whyyou" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="cechy">Jakie są twoje cechy dobre i złe</label>
+                        <textarea id="cechy" name="cechy" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="motywacja">List Motywacyjny (Min 30 słów)</label>
+                        <textarea id="motywacja" name="motywacja" required></textarea>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Wyślij podanie" class="btn">
+                    </div>
+                </form>
+                <script>
+                    const form = document.getElementById("application-form");
+                    form.addEventListener("submit", (event) => {
+                      event.preventDefault();
+                      const formData = new FormData(event.target);
+                      const webhookUrl = "https://discord.com/api/webhooks/1156961570304311296/WUsHYcZRtmgYcbe_WtV9KREjvo2R0mKLIBbO2EhgjIQvc2e3Sirffhf_2Bwv8BByhzeJ";
+                      const payload = {
+                        content: "Nowe podanie do CarZone!",
+                        embeds: [
+                          {
+                            title: "Nowe podanie do CarZone!",
+                            fields: [
+                              { name: "Nick discord z #:", value: formData.get("discordwth"), inline: true },
+                              { name: "Imię i nazwisko IC:", value: formData.get("nameic"), inline: true },
+                              { name: "Wiek OOC:", value: formData.get("ageooc"), inline: true },
+                              { name: "Dlaczego chcesz wstąpić do CarZone (Min 30 słów):", value: formData.get("whyt"), inline: true },
+                              { name: "Wiek IC:", value: formData.get("ageic") },
+                              { name: "Mutacja Głosu", value: formData.get("mutacja") },
+                              { name: "Czy posiadasz prawo jazdy (IC)", value: formData.get("prawojazdy"), inline: true },
+                              { name: "Czy byłeś/aś kiedyś karany/a ? (IC)", value: formData.get("karany") },
+                              { name: "Dlaczego mamy wybrać akurat ciebie?", value: formData.get("whyyou") },
+                              { name: "Jakie są twoje cechy dobre i złe", value: formData.get("cechy") },
+                              { name: "List Motywacyjny (Min 30 słów)", value: formData.get("motywacja") },
+                            ],
+                          },
+                        ],
+                      };
+                      fetch(webhookUrl, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload),
+                      })
+                        .then(() => {
+                          alert("Podanie zostało wysłane!");
+                          form.reset();
+                        })
+                        .catch(() => {
+                          alert("Wystąpił błąd podczas wysyłania podania. Spróbuj ponownie później.");
+                        });
+                    });
+                  </script>                  
+            </div>
+        </section>
+    </main>
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 Nightcity. Wszelkie prawa zastrzeżone.</p>
+            <p>Created by Syblus</p>
+            <ul>
+                <li><a href="index.html">Strona główna</a></li>
+                <li><a href="regulamin.html">Regulamin</a></li>
+                <li><a href="discord.html">Discord</a></li>
+                <li><a href="podanie.html">Podania</a></li>
+            </ul>
+        </div>
+    </footer>
+    <script src="https://kit.fontawesome.com/8f4b4c2d36.js" crossorigin="anonymous"></script>
+    <script src="app.js"></script>
+</body>
+</html>   
