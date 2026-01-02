@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# 1. Usuwanie .html z URL
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.*)$ $1.html [NC,L]
+
+# 2. Przekierowanie z index.html na stronę główną (czysty ukośnik)
+RewriteCond %{THE_REQUEST} /index\.html [NC]
+RewriteRule ^(.*)index\.html$ /$1 [R=301,L]
